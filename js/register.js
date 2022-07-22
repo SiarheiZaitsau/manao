@@ -12,6 +12,9 @@ $("document").ready(function () {
           .html("")
           .css({ display: "none" });
         $("#register")[0].reset();
+        $("#success")
+          .html("User successfully registered")
+          .css({ display: "block" });
       },
       error: function (response) {
         const data = JSON.parse(response.responseText);

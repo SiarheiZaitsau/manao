@@ -58,6 +58,7 @@
         name="name"
       />
       <p id="name-error" class="error"> </p>
+      <p id="success" class="success"> </p>
       <script type="text/javascript">
         document.write(
           '<input id="register-button" type="submit" value="Register" name="submit" class="form__submit" />'

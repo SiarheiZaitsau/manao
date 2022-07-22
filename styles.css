@@ -87,8 +87,16 @@ a:active {
 #login-error {
   display: none;
 }
+#success {
+  display: none;
+}
 .error {
   font-size: 12px;
   color: tomato;
+  margin-bottom: 8px;
+}
+.success {
+  color: green;
+  font-size: 14px;
   margin-bottom: 8px;
 }
