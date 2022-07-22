@@ -30,8 +30,7 @@ class Database{
   }
   }
   return 'Incorrect entry';
-}   
-// change password                
+}   // change password                
  
 	public function delete($username){
     if(($key = array_search($username, array_column($this-> stored_users, 'username'))) !== false) {
@@ -46,8 +45,17 @@ class Database{
     $user = new Register($username, $password, $repeatedPassword, $email, $name);
     return $user;
   }
- 
+
+ private function getUser($username) {
+  foreach($this->stored_users as $user) {
+    if($user['username'] == $username) {
+        return $user;
+    }
+    else {
+      return 'No such user';
+    }
+   }
+  }
 }
- 
  $database = new Database();
 ?>
