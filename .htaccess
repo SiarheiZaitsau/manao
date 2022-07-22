@@ -1,0 +1,9 @@
+<Files "data.json">  
+  Require all denied
+</Files>
+<FilesMatch  "register\.php|login\.php">
+  SetEnvIfNoCase X-Requested-With XMLHttpRequest ajax
+  Order Deny,Allow
+  Deny from all
+  Allow from env=ajax
+</FilesMatch>
