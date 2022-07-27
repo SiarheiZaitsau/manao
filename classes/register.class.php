@@ -71,7 +71,7 @@ class Register {
     }
 }
   private function validateName($nameToVerify) {
-    if(!strlen($nameToVerify) <= 2 && !ctype_alpha($nameToVerify)) {
+    if(strlen($nameToVerify) < 2 || !ctype_alpha($nameToVerify)) {
       $this-> errors['name'] = "Name should contain at least 2 characters and only letters allowed";
         return false;
     } else {
