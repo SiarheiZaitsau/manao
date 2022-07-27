@@ -43,7 +43,7 @@ class Register {
     }
       if(preg_match('/\s/', $usernameToVerify)) {
         $this-> errors['username'] = "Spaces not allowed!";
-        return false;
+      return false;
       }
     return true;
   }
@@ -56,6 +56,10 @@ class Register {
       $this-> errors['password'] = "Password should be at least 6 characters and contain an number";
       return false;
     }
+    if(preg_match('/\s/', $passwordToVerify)) {
+      $this-> errors['password'] = "Spaces not allowed!";
+    return false;
+      }
     return true;
   }
   private function validateEmail($emailToVerify) {
