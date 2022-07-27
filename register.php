@@ -1,19 +1,13 @@
 <?php include_once("./classes/register.class.php") ?>
 <?php include_once("./classes/database.class.php") ?>
 <?php
-function clear_data($val){
-    $val = trim($val);
-    $val = stripslashes($val);
-    $val = strip_tags($val);
-    $val = htmlspecialchars($val);
-    return $val;
-}
+
 if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
-  $username = clear_data($_POST['username']);
-  $email = clear_data($_POST['email']);
-  $password = clear_data($_POST['password']);
-  $repeatedPassword = clear_data($_POST['password-repeat']);
-  $name = clear_data($_POST['name']);
+  $username = $_POST['username'];
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+  $repeatedPassword = $_POST['password-repeat'];
+  $name = $_POST['name'];
   // $res = $database->update($username, $password, $repeatedPassword); // accepts newPassword as third param
   // echo json_encode($res); // change password
 

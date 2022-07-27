@@ -1,15 +1,9 @@
 <?php require("./classes/login.class.php") ?>
 <?php
-function clear_data($val){
-    $val = trim($val);
-    $val = stripslashes($val);
-    $val = strip_tags($val);
-    $val = htmlspecialchars($val);
-    return $val;
-}
+
 if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
-  $username = clear_data($_POST['username']);
-  $password = clear_data($_POST['password']);
+  $username = $_POST['username'];
+  $password = $_POST['password'];
 
   $user = new LoginUser($username, $password);
   $success = $user->success;

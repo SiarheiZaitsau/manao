@@ -35,13 +35,16 @@ class Register {
     if(empty($this -> errors)) {
       $this-> insertUser();
     }
-
   }
   private function validateUsername ($usernameToVerify) {
     if(strlen($usernameToVerify) < 6) {
       $this-> errors['username'] = "Username should be at least 6 characters!";
       return false;
     }
+      if(preg_match('/\s/', $usernameToVerify)) {
+        $this-> errors['username'] = "Spaces not allowed!";
+        return false;
+      }
     return true;
   }
   private function validatePassword ($passwordToVerify, $repeated_passwordToVerify) {
@@ -55,7 +58,7 @@ class Register {
     }
     return true;
   }
-  function validateEmail($emailToVerify) {
+  private function validateEmail($emailToVerify) {
     if(!filter_var($emailToVerify, FILTER_VALIDATE_EMAIL)) {
         $this-> errors['email'] = "Incorrect email address";
         return false;
@@ -63,7 +66,7 @@ class Register {
         return true;
     }
 }
-  function validateName($nameToVerify) {
+  private function validateName($nameToVerify) {
     if(!strlen($nameToVerify) <= 2 && !ctype_alpha($nameToVerify)) {
       $this-> errors['name'] = "Name should contain at least 2 characters and only letters allowed";
         return false;
@@ -108,5 +111,12 @@ class Register {
       }
     }
   }
+  function clear_data($val){
+    $val = trim($val);
+    $val = stripslashes($val);
+    $val = strip_tags($val);
+    $val = htmlspecialchars($val);
+    return $val;
+}
 }
 ?>
