@@ -89,23 +89,23 @@ class Register {
     }
   
 }
-  private function isFieldUnique($fieldName){
+  private function isFieldUnique($value, $fieldName){
     foreach($this->stored_users as $user) {
-      if($this-> username == $user[$fieldName]) {
+      if(strtolower($value) == strtolower($user[$fieldName])) {
         if($fieldName == 'username') {
-          $this-> errors['username'] = "User already exist";
+          $this-> errors[$fieldName] = "User already exist";
         }
-        if($fieldName = 'email') {
-          $this-> errors['email'] = "Email is already in use";
+        if($fieldName == 'email') {
+          $this-> errors[$fieldName] = "Email is already in use";
         } 
-        return true;
+        return false;
       }
     }
-    return false;
+    return true;
   }
 
   private function insertUser(){
-    if($this-> isFieldUnique('username') == FALSE && $this-> isFieldUnique('email') == FALSE) {
+    if($this-> isFieldUnique($this-> username, "username") == TRUE && $this-> isFieldUnique($this-> email, "email") == TRUE) {
       array_push($this-> stored_users, $this-> new_user);
       if(file_put_contents($this-> storage, json_encode($this-> stored_users, JSON_PRETTY_PRINT))) {
         return $this-> success = "User successfully registered";
