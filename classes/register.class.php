@@ -74,7 +74,7 @@ class Register {
     }
 }
   private function validateName($nameToVerify) {
-    if(strlen($nameToVerify) < 2 || !preg_match('/[^a-zA-Z]/', $nameToVerify)) {
+    if(strlen($nameToVerify) < 2 || preg_match('/[^a-zA-Z]/', $nameToVerify)) {
       $this-> errors['name'] = "Name should contain at least 2 characters and only letters allowed";
         return false;
     } else {
