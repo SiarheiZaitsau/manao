@@ -8,15 +8,6 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
   $password = $_POST['password'];
   $repeatedPassword = $_POST['password-repeat'];
   $name = $_POST['name'];
-  // $res = $database->update($username, $password, $repeatedPassword); // accepts newPassword as third param
-  // echo json_encode($res); // change password
-
-  // $res = $database->read($username);
-  // echo json_encode($res); // get User from json
-
-  // $res = $database->delete($username);
-  // echo json_encode($res); // delete User from json
-
 
   $user =  $database->create($username, $password, $repeatedPassword, $email, $name);
   $errors = $user->errors;

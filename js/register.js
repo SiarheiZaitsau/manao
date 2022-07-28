@@ -19,6 +19,7 @@ $("document").ready(function () {
       error: function (response) {
         const data = JSON.parse(response.responseText);
         const errors = data.errors;
+        $("#success").html("").css({ display: "none" });
         for (let err in errors) {
           console.log(err);
           if (err === "username") {

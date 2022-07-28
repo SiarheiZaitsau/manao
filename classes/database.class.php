@@ -10,35 +10,33 @@ class Database{
 	}
  
  
-	public function read($username){
-		if($this-> getUser($username)) {
-      return ($this-> getUser($username));
+	public function read($id){
+		if($this-> getUser($id)) {
+      return ($this-> getUser($id));
     }
     else {
       return 'No such user';
     }
 	}
  
-	public function update($username, $password, $newPassword){
+	public function update($id, $fieldname, $newValue){
   foreach($this->stored_users as &$user) {
-    if($user['username'] == $username) {
-      if(password_verify($password, $user['password'])) {
-        $user['password'] = password_hash($newPassword, PASSWORD_DEFAULT);
-        file_put_contents('data.json', json_encode(array_values($this->stored_users)));
-        return 'Password successfully changed';
-    }
+    if($user['id'] == $id) {
+      $user[$fieldname] = $newValue;
+      file_put_contents('data.json', json_encode(array_values($this->stored_users)));
+      return 'User successfully changed';
   }
   }
   return 'Incorrect entry';
-}   // change password                
+}                
  
-	public function delete($username){
-    if(($key = array_search($username, array_column($this-> stored_users, 'username'))) !== false) {
+	public function delete($id){
+    if(($key = array_search($id, array_column($this-> stored_users, 'username'))) !== false) {
     unset($this-> stored_users[$key]);
     file_put_contents('data.json', json_encode(array_values($this-> stored_users)));
-    return "{$username} successfully deleted";
-}   
- 		return "User Not Found";
+    return "user with {$id} successfully deleted";
+    }   
+ 	  return "User Not Found";
 	}
 
   public function create($username, $password, $repeatedPassword, $email, $name){
@@ -46,10 +44,10 @@ class Database{
     return $user;
   }
 
- private function getUser($username) {
+ private function getUser($id) {
   foreach($this->stored_users as $user) {
-    if($user['username'] == $username) {
-        return $user;
+    if($user['id'] == $id) {
+      return $user;
     }
     else {
       return 'No such user';

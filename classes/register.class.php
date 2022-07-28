@@ -10,11 +10,13 @@ class Register {
   public $success;
   private $storage = 'data.json';
   private $new_user;
+  private $id;
 
   public function __construct($username, $password, $repeated_password, $email, $name) {
     $this-> username = filter_var(trim($username), FILTER_SANITIZE_STRING);
     $this-> email = filter_var(trim($email), FILTER_SANITIZE_STRING);
     $this-> name = filter_var(trim($name), FILTER_SANITIZE_STRING);
+    $this-> id = uniqid();
     $this-> errors = array();
     $this-> raw_password = filter_var(trim($password), FILTER_SANITIZE_STRING);
     $this-> repeated_password = filter_var(trim($repeated_password), FILTER_SANITIZE_STRING);
@@ -25,6 +27,7 @@ class Register {
       "password" => $this-> encrypted_password,
       "email" => $this -> email,
       "name" => $this -> name,
+      "id" => $this -> id,
     ];
 
     $this-> checkFieldValues();
@@ -71,7 +74,7 @@ class Register {
     }
 }
   private function validateName($nameToVerify) {
-    if(strlen($nameToVerify) < 2 || !ctype_alpha($nameToVerify)) {
+    if(strlen($nameToVerify) < 2 || !preg_match('/[^a-zA-Z]/', $nameToVerify)) {
       $this-> errors['name'] = "Name should contain at least 2 characters and only letters allowed";
         return false;
     } else {
